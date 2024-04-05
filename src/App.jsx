@@ -6,10 +6,10 @@ function App() {
   return (
     <div className='hero-page'>
       <div>
-        <h1>MY FOOD RECIPE APP</h1>
+        <h1>WELCOME TO MY FOOD RECIPE APP</h1>
       </div>
       <div className='app'>
-        <h1>Food Recipe</h1>
+        <h1>Enter Your Meal Below</h1>
         <RecipeSearch />
       </div>
     </div>

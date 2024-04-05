@@ -6,6 +6,8 @@ const RecipeSearch = () => {
   const [selectedRecipe, setSelectedRecipe] = useState(null)
   const [ingredients, setIngredients] = useState([])
 
+  const [showIngredients, setShowIngredients] = useState(false);
+
   const handleSearch = async (searchTerm) => {
     try {
       if (searchTerm.trim() === '') {
@@ -15,7 +17,7 @@ const RecipeSearch = () => {
 
       const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchTerm}`)
       const data = await response.json()
-      
+
       if (data.meals) {
         setRecipes(data.meals);
       } else {
@@ -31,7 +33,7 @@ const RecipeSearch = () => {
     try {
       const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeId}`);
       const data = await response.json()
-      
+
       if (data.meals && data.meals.length > 0) {
         setSelectedRecipe(data.meals[0])
 
@@ -70,20 +72,26 @@ const RecipeSearch = () => {
         {recipes.map((recipe) => (
           <div key={recipe.idMeal} onClick={() => handleRecipeClick(recipe.idMeal)}>
             <h3>{recipe.strMeal}</h3>
-            <img src={recipe.strMealThumb} alt={recipe.strMeal} />
+            <img src={recipe.strMealThumb} alt={recipe.strMeal} height={400} width={400} />
           </div>
         ))}
       </div>
       {selectedRecipe && (
         <div className='recipe-details'>
           <h2>{selectedRecipe.strMeal}</h2>
-          <img src={selectedRecipe.strMealThumb} alt={selectedRecipe.strMeal} />
-          <h3>Ingredients:</h3>
-          <ul>
-            {ingredients.map((ingredient, index) => (
-              <li key={index}>{ingredient.measure} {ingredient.ingredient}</li>
-            ))}
-          </ul>
+          <img id='pic' src={selectedRecipe.strMealThumb} alt={selectedRecipe.strMeal} height={400} width={400}/>
+          {
+            showIngredients && (
+              <>
+                <h3>Ingredients:</h3>
+                <ul>
+                  {ingredients.map((ingredient, index) => (
+                    <li key={index}>{ingredient.measure} {ingredient.ingredient}</li>
+                  ))}
+                </ul>
+              </>
+            )}
+            <button onClick={() => setShowIngredients(prev => !prev)}>{showIngredients ? 'Hide': 'showIngredient'}</button>
           <p>{selectedRecipe.strInstructions}</p>
         </div>
       )}

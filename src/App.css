@@ -24,11 +24,12 @@ input {
   background-position: center;
   padding: 50px;
   border-radius: 20px;
-  height: 80vh;
-  width: 80vw;
+  min-height: 80vh;
+  min-width: 80vw;
 }
 
 .app {
+  width: 100%;
   padding: 50px;
   border-radius: 20px;
 }
@@ -44,6 +45,39 @@ input {
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+.app .search {
+  width: 100%;
+}
+
+.recipe-list {
+  margin: 2rem auto 1rem;
+  max-height: 60vh;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.recipe-details {
+  color: white;
+  font-size: larger;
+  display: flex;
+  flex-direction: column;
+}
+
+#pic {
+  align-self: center;
+}
+
+button {
+  margin-top: 1rem;
+  align-self: center;
+  width: 20vw;
 }
 
 @keyframes logo-spin {
